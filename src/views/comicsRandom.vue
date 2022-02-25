@@ -4,7 +4,7 @@
             <v-layout  wrap justify-center align-center>
 
                 <v-flex xs12 justify="center" align="center" justify-center align-center >
-                    <v-text-field v-model="cantidad_comics" label="Comics random" hint="Ingrese la cantidad de comics a iterar "></v-text-field>
+                    <v-text-field v-model="cantidad_comics" label="Comics random!" hint="Ingrese la cantidad de comics a iterar "></v-text-field>
                 </v-flex >
 
                 <v-flex xs12 justify="center" align="center" justify-center align-center>
@@ -161,7 +161,11 @@ export default {
 
             this.axios({ 
                 method: 'GET',
-                url: url
+                url: url,
+                crossdomain: true,
+                headers:{
+                    'Access-Control-Allow-Origin':'*'
+                }
             }).then((response) => {
 
                 let comic = response.data   
