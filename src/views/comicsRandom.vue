@@ -4,7 +4,7 @@
             <v-layout  wrap justify-center align-center>
 
                 <v-flex xs12 justify="center" align="center" justify-center align-center >
-                    <v-text-field v-model="cantidad_comics" label="Cantidad de comics" hint="Ingrese la cantidad de comics a iterar "></v-text-field>
+                    <v-text-field v-model="cantidad_comics" label="Comics random" hint="Ingrese la cantidad de comics a iterar "></v-text-field>
                 </v-flex >
 
                 <v-flex xs12 justify="center" align="center" justify-center align-center>
