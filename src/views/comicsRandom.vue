@@ -1,16 +1,22 @@
 <template>
     <div>
-        <v-container mt-3 fill-height >
-            <v-layout  wrap justify-center align-center>
+        <v-container mt-3 >
+            <v-layout  wrap >
 
-                <v-flex xs12 justify="center" align="center" justify-center align-center >
-                    <v-text-field v-model="cantidad_comics" label="Comics random!" hint="Ingrese la cantidad de comics a iterar "></v-text-field>
+
+                <v-flex xs12 mb-3 >
+                    <v-btn class="white--text" block small  color="red" @click="borrarPuntuaciones();">
+                        <v-icon>
+                            mdi-remove
+                        </v-icon>
+                        Borrar  puntuaciones
+                    </v-btn>    
                 </v-flex >
 
-                <v-flex xs12 justify="center" align="center" justify-center align-center>
+                <v-flex xs12 >
                     
 
-                    <v-card  max-width="900"  mt-3 pt-3>
+                    <v-card   mt-3 pt-3 center>
 
                         <v-toolbar color="indigo" dark >
                             <v-toolbar-title>{{comic.titulo}} </v-toolbar-title>
@@ -31,8 +37,8 @@
                         <v-card-text class="text--primary">
                             <v-img
                             class="white--text align-end"
-                            max-height="500px"
-                            max-width="900px"
+                            max-height="1000px"
+                            max-width="1000px"
                             :src="comic.imagen"
                             >
                             </v-img>
@@ -88,13 +94,20 @@ export default {
                 calificacion:null,
                 puntuado:false
             },
-            cantidad_comics:10
+            cantidad_comics:2000
         }
     }, 
     mounted(){
         this.cargarNuevoComic();
     },
     methods:{
+
+        borrarPuntuaciones(){
+
+            localStorage.setItem("comics_calificados","[]");
+            this.cargarNuevoComic();
+
+        },
 
         guardarCalificacion(calificacion){
 
@@ -122,6 +135,8 @@ export default {
         comicExistente(num_comic){
 
             let comics_calificados = JSON.parse(localStorage.getItem("comics_calificados"));
+  
+            console.log("comics_calificados",comics_calificados)
 
             if(comics_calificados != null)
             {
@@ -157,17 +172,13 @@ export default {
                 return false;
             }
 
-            let url = "https://xkcd.com/"+id_comic+"/info.0.json"; 
+            let url = "https://helperapi-masiv.herokuapp.com/comics?num="+id_comic
 
             this.axios({ 
                 method: 'GET',
-                url: url,
-                crossdomain: true,
-                headers:{
-                    'Access-Control-Allow-Origin':'*'
-                }
+                url: url
             }).then((response) => {
-
+                
                 let comic = response.data   
 
                 if(this.comic.num == comic.num)
@@ -190,8 +201,8 @@ export default {
 
             })
 
-        },
-
+        }
+  
         
     }
 }
