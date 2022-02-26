@@ -20,3 +20,7 @@ Para ejecutar el sistema se usa el siguiente comando
 npm run dev
 ```
 
+## DEMO
+
+Link: https://app-pruebatec-masiv.herokuapp.com/
+
